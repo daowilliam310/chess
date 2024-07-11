@@ -4,11 +4,14 @@
   import { onMount } from 'svelte';
   import pieceMap from '../assets/chess-pieces.js'
   import eggert from "../svg/eggert-2.svg"
+  import eggOne from "../images/egg1.jpg"
+  import eggTwo from "../images/egg2.jpg"
  let chess = new Chess();
   let board = chess.board();
   let selectedSquare = null;
   let legalMoves = [];
   let avatars = "https://www.cs.ucla.edu/wp-content/uploads/cs/eggert-2.jpg"; 
+  let avatar3 = "hello"
   let avatars2 = "https://images.squarespace-cdn.com/content/v1/650b930d49bb6e16dbc86f4e/3b7c1a24-9459-4d47-8fde-5db01ded9ca8/levy-landing-no-bg-2.png";
    let whitePromotionPiece = 'q'; // Default promotion piece for white
   let blackPromotionPiece = 'q'; // Default promotion piece for black
@@ -165,10 +168,25 @@ catch (error) {
 
   function getPieceSVG(square) {
     if (square) {
-      return pieceMap[square.type][square.color];
-    }
-    return null;
+      if (avatarCount %2 != 0){
+      return pieceMap[square.type][square.color];}
+    
+    else {
+      if (square.type == 'k' && square.color == 'w') {
+return eggOne
+
+      }
+      else if (square.type == 'k' && square.color == 'b'){
+return eggTwo
+
+      }
+      else{
+        return pieceMap[square.type][square.color];}
+      
+    
+    
   }
+  }return null;}
 
   function changeAvatar() {
      console.log('Button clicked');
@@ -182,6 +200,8 @@ avatarCount++;
      }
     
     console.log("New avatar link: ", avatars)
+    console.log("check")
+    updateBoard();
   }
 </script>
 
